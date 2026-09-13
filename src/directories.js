@@ -1,4 +1,4 @@
-// kynth-mcp — the directory tools.
+// compound-mcp — the directory tools.
 //
 // The compliance lookups in server.js answer a question a person already knew they had.
 // These answer questions an AGENT has mid-task, which is a different and much larger surface:
@@ -32,7 +32,7 @@ const MAX_ROWS = 10;
  *  failure available to a tool something is waiting on. Same class as the three shared libraries
  *  this estate fixed on 2026-08-13. The rejection lands in the tool() wrapper below, which already
  *  turns an upstream failure into a readable `{ error }` rather than a protocol error. */
-const TIMEOUT_MS = Number(process.env.KYNTH_MCP_TIMEOUT_MS || 10_000);
+const TIMEOUT_MS = Number(process.env.COMPOUND_MCP_TIMEOUT_MS || 10_000);
 
 async function get(url) {
   const res = await fetch(url, {

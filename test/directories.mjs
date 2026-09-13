@@ -26,7 +26,7 @@ import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 
 const transport = new StdioClientTransport({
   command: 'node',
-  args: [new URL('../bin/kynth-mcp.js', import.meta.url).pathname],
+  args: [new URL('../bin/compound-mcp.js', import.meta.url).pathname],
 });
 const client = new Client({ name: 'directories-smoke', version: '0.0.0' });
 await client.connect(transport);

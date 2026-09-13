@@ -8,8 +8,8 @@
 //
 // On 2026-08-13 this package was serving, simultaneously:
 //
-//   npm         kynth-mcp@0.2.0, published 2026-08-06, containing the PRE-FIX code
-//   MCP registry studio.compound/kynth-mcp@0.1.2, describing a two-tool compliance server
+//   npm         compound-mcp@0.2.0, published 2026-08-06, containing the PRE-FIX code
+//   MCP registry studio.compound/compound-mcp@0.1.2, describing a two-tool compliance server
 //   this repo    server.json at 0.2.0, ten tools, never published anywhere
 //
 // Three different answers to "what is this server", none of them agreeing, and nothing anywhere
@@ -127,7 +127,7 @@ let live = new Map();
 let livePublished = null;
 try {
   livePublished = run('npm', ['view', `${pkg.name}`, 'version']).trim();
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'kynth-mcp-live-'));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'compound-mcp-live-'));
   const tgz = run('npm', ['pack', `${pkg.name}@${livePublished}`, '--pack-destination', tmp]).trim().split('\n').pop();
   run('tar', ['-xzf', path.join(tmp, tgz), '-C', tmp]);
   const pkgDir = path.join(tmp, 'package');

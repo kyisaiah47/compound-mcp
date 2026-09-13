@@ -1,7 +1,7 @@
 {
-  "name": "kynth-mcp",
+  "name": "compound-mcp",
   "version": "0.4.0",
-  "mcpName": "studio.compound/kynth-mcp",
+  "mcpName": "studio.compound/compound-mcp",
   "description": "MCP server from Compound Labs \u2014 eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
   "type": "module",
   "license": "MIT",
@@ -40,7 +40,7 @@
     "expo"
   ],
   "bin": {
-    "kynth-mcp": "bin/kynth-mcp.js"
+    "compound-mcp": "bin/compound-mcp.js"
   },
   "files": [
     "bin",
@@ -52,8 +52,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "start": "node bin/kynth-mcp.js",
-    "start:http": "node bin/kynth-mcp.js --http 8974"
+    "start": "node bin/compound-mcp.js",
+    "start:http": "node bin/compound-mcp.js --http 8974"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",

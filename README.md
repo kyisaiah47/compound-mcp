@@ -1,8 +1,8 @@
-# kynth-mcp
+# compound-mcp
 
 MCP server from [Compound Labs](https://thecompound.tech). Eleven read-only lookup tools backed by live public data — no API key, no signup, nothing to sign up for.
 
-`mcp-name: studio.compound/kynth-mcp`
+`mcp-name: studio.compound/compound-mcp`
 
 Most of these answer questions that a model cannot answer correctly from a training cutoff, because the underlying fact changed after it: what a model costs today, whether a library is still maintained, whether someone has already published the skill you are about to write.
 
@@ -42,22 +42,22 @@ Checks a nonprofit's EIN against the IRS auto-revocation list and the California
 ## Install
 
 ```sh
-npm install -g kynth-mcp
+npm install -g compound-mcp
 ```
 
-Or run without installing: `npx -y kynth-mcp`
+Or run without installing: `npx -y compound-mcp`
 
 ## Run
 
 ```sh
-kynth-mcp                # stdio (for MCP clients)
-kynth-mcp --http 8974    # streamable HTTP on http://localhost:8974/mcp
+compound-mcp                # stdio (for MCP clients)
+compound-mcp --http 8974    # streamable HTTP on http://localhost:8974/mcp
 ```
 
 ## Claude Code
 
 ```sh
-claude mcp add kynth -- npx -y kynth-mcp
+claude mcp add compound -- npx -y compound-mcp
 ```
 
 ## Claude Desktop
@@ -67,9 +67,9 @@ Add to `claude_desktop_config.json` (Settings → Developer → Edit Config):
 ```json
 {
   "mcpServers": {
-    "kynth": {
+    "compound": {
       "command": "npx",
-      "args": ["-y", "kynth-mcp"]
+      "args": ["-y", "compound-mcp"]
     }
   }
 }

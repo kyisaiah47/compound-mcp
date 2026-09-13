@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// kynth-mcp entry point.
+// compound-mcp entry point.
 //
-//   kynth-mcp                 stdio transport (Claude Code / Claude Desktop)
-//   kynth-mcp --http [port]   streamable HTTP transport (default port 8974)
+//   compound-mcp                 stdio transport (Claude Code / Claude Desktop)
+//   compound-mcp --http [port]   streamable HTTP transport (default port 8974)
 
 import { buildServer } from '../src/server.js';
 
@@ -64,11 +64,11 @@ if (args.includes('--http')) {
    * `TCP *:8974 (LISTEN)` — so this local dev server was reachable from every device on the
    * network. Nothing about an MCP server for one user's agent wants that. */
   app.listen(port, '127.0.0.1', () => {
-    console.error(`kynth-mcp listening on http://127.0.0.1:${port}/mcp (streamable HTTP, stateless, loopback only)`);
+    console.error(`compound-mcp listening on http://127.0.0.1:${port}/mcp (streamable HTTP, stateless, loopback only)`);
   });
 } else {
   const { StdioServerTransport } = await import('@modelcontextprotocol/sdk/server/stdio.js');
   const server = buildServer();
   await server.connect(new StdioServerTransport());
-  console.error('kynth-mcp running on stdio');
+  console.error('compound-mcp running on stdio');
 }

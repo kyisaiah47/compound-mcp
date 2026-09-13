@@ -6,7 +6,7 @@
 //   node ops/lhm/sync-manifest.mjs           # rewrite the manifest, then report
 //
 // ⛔ WHY THIS EXISTS. On 2026-08-14 this repo was serving three different answers to "how many
-// tools does kynth-mcp have":
+// tools does compound-mcp have":
 //
 //   tools/list on the built server   ELEVEN
 //   README.md, first line            "Eleven read-only lookup tools"

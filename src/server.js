@@ -1,4 +1,4 @@
-// kynth-mcp — MCP server for Kynth Studios compliance lookups.
+// compound-mcp — MCP server for Compound Labs compliance lookups.
 //
 // Two tools, both backed by live public data:
 //
@@ -69,7 +69,7 @@ function normalizeDomain(input) {
 /** Every request gets a deadline. An `await fetch` with no `signal` never settles when the socket
  *  dies — the MCP client then hangs with no error and the agent stalls mid-turn, which is the worst
  *  possible failure for a tool an agent is waiting on. */
-const TIMEOUT_MS = Number(process.env.KYNTH_MCP_TIMEOUT_MS || 10_000);
+const TIMEOUT_MS = Number(process.env.COMPOUND_MCP_TIMEOUT_MS || 10_000);
 
 async function fetchJson(url, headers = {}) {
   const res = await fetch(url, { headers, signal: AbortSignal.timeout(TIMEOUT_MS) });
@@ -187,7 +187,7 @@ async function lookupNonprofitStatus(rawEin) {
 /** Build the McpServer with every tool registered. One instance per connection. */
 export function buildServer() {
   const server = new McpServer({
-    name: 'kynth-mcp',
+    name: 'compound-mcp',
     version: PKG.version,
   });
 
