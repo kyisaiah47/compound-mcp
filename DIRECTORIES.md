@@ -1,7 +1,7 @@
 # Where compound-mcp and the ParseRail plugin are listed
 
 Read live 2026-09-04. Most of this surface is already armed and watched by
-`studio.compound.mcpdir.tick` (`compound-ops/portals/mcpdir/tick.mjs`, every 6 hours), this file
+`compound.shared.mcpdir.tick` (`compound-ops/portals/mcpdir/tick.mjs`, every 6 hours), this file
 records state, it does not replace that job. Its own `state.json` is the live source; this is
 a snapshot plus the two items that job does not cover.
 
