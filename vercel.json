@@ -2,63 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
-      "source": "/x",
-      "destination": "/?utm_source=founder-x&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/kx",
-      "destination": "/?utm_source=compound-x&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/ax",
-      "destination": "/?utm_source=ctxwindow-x&utm_medium=social",
-      "permanent": false
-    },
-    {
       "source": "/bs",
       "destination": "/?utm_source=founder-bluesky&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/kb",
-      "destination": "/?utm_source=compound-bluesky&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/li",
-      "destination": "/?utm_source=founder-linkedin&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/kl",
-      "destination": "/?utm_source=compound-linkedin&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/pl",
-      "destination": "/?utm_source=founder-peerlist&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/dv",
-      "destination": "/?utm_source=founder-devto&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/kd",
-      "destination": "/?utm_source=compound-devto&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/hn",
-      "destination": "/?utm_source=founder-hashnode&utm_medium=social",
-      "permanent": false
-    },
-    {
-      "source": "/th",
-      "destination": "/?utm_source=founder-threads&utm_medium=social",
       "permanent": false
     },
     {
@@ -67,8 +12,123 @@
       "permanent": false
     },
     {
+      "source": "/x",
+      "destination": "/?utm_source=founder-x&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/x/:content",
+      "destination": "/?utm_source=founder-x&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/kx",
+      "destination": "/?utm_source=compound-x&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/kx/:content",
+      "destination": "/?utm_source=compound-x&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/ax",
+      "destination": "/?utm_source=ctxwindow-x&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/ax/:content",
+      "destination": "/?utm_source=ctxwindow-x&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/bsky",
+      "destination": "/?utm_source=founder-bluesky&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/bsky/:content",
+      "destination": "/?utm_source=founder-bluesky&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/kb",
+      "destination": "/?utm_source=compound-bluesky&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/kb/:content",
+      "destination": "/?utm_source=compound-bluesky&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/li",
+      "destination": "/?utm_source=founder-linkedin&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/li/:content",
+      "destination": "/?utm_source=founder-linkedin&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/kl",
+      "destination": "/?utm_source=compound-linkedin&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/kl/:content",
+      "destination": "/?utm_source=compound-linkedin&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/pl",
+      "destination": "/?utm_source=founder-peerlist&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/pl/:content",
+      "destination": "/?utm_source=founder-peerlist&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/dv",
+      "destination": "/?utm_source=founder-devto&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/dv/:content",
+      "destination": "/?utm_source=founder-devto&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/kd",
+      "destination": "/?utm_source=compound-devto&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/kd/:content",
+      "destination": "/?utm_source=compound-devto&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/th",
+      "destination": "/?utm_source=founder-threads&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/th/:content",
+      "destination": "/?utm_source=founder-threads&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
       "source": "/ig",
       "destination": "/?utm_source=founder-ig&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/ig/:content",
+      "destination": "/?utm_source=founder-ig&utm_medium=social&utm_content=:content",
       "permanent": false
     },
     {
@@ -77,8 +137,18 @@
       "permanent": false
     },
     {
+      "source": "/ki/:content",
+      "destination": "/?utm_source=compound-ig&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
       "source": "/bg",
-      "destination": "/?utm_source=biasfile-ig&utm_medium=social",
+      "destination": "/?utm_source=ig-legacy&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/bg/:content",
+      "destination": "/?utm_source=ig-legacy&utm_medium=social&utm_content=:content",
       "permanent": false
     },
     {
@@ -87,8 +157,18 @@
       "permanent": false
     },
     {
+      "source": "/ab/:content",
+      "destination": "/?utm_source=ctxwindow-bluesky&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
       "source": "/st",
       "destination": "/?utm_source=standup-threads&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/st/:content",
+      "destination": "/?utm_source=standup-threads&utm_medium=social&utm_content=:content",
       "permanent": false
     },
     {
@@ -97,8 +177,18 @@
       "permanent": false
     },
     {
+      "source": "/sb/:content",
+      "destination": "/?utm_source=standup-bluesky&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
       "source": "/at",
       "destination": "/?utm_source=agentwire-threads&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/at/:content",
+      "destination": "/?utm_source=agentwire-threads&utm_medium=social&utm_content=:content",
       "permanent": false
     },
     {
@@ -107,13 +197,38 @@
       "permanent": false
     },
     {
+      "source": "/aw/:content",
+      "destination": "/?utm_source=agentwire-bluesky&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
       "source": "/fx",
       "destination": "/?utm_source=frontwire-x&utm_medium=social",
       "permanent": false
     },
     {
+      "source": "/fx/:content",
+      "destination": "/?utm_source=frontwire-x&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
       "source": "/ft",
       "destination": "/?utm_source=frontwire-threads&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/ft/:content",
+      "destination": "/?utm_source=frontwire-threads&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/fb",
+      "destination": "/?utm_source=compound-facebook&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/fb/:content",
+      "destination": "/?utm_source=compound-facebook&utm_medium=social&utm_content=:content",
       "permanent": false
     }
   ]
