@@ -2,11 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
-      "source": "/bs",
-      "destination": "/?utm_source=founder-bluesky&utm_medium=social",
-      "permanent": false
-    },
-    {
       "source": "/kt",
       "destination": "/?utm_source=compound-threads&utm_medium=social",
       "permanent": false
@@ -149,6 +144,16 @@
     {
       "source": "/bg/:content",
       "destination": "/?utm_source=ig-legacy&utm_medium=social&utm_content=:content",
+      "permanent": false
+    },
+    {
+      "source": "/bs",
+      "destination": "/?utm_source=founder-bluesky&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/bs/:content",
+      "destination": "/?utm_source=founder-bluesky&utm_medium=social&utm_content=:content",
       "permanent": false
     },
     {
