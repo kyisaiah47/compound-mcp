@@ -230,6 +230,16 @@
       "source": "/fb/:content",
       "destination": "/?utm_source=compound-facebook&utm_medium=social&utm_content=:content",
       "permanent": false
+    },
+    {
+      "source": "/hn",
+      "destination": "/?utm_source=founder-hashnode&utm_medium=social",
+      "permanent": false
+    },
+    {
+      "source": "/hn/:content",
+      "destination": "/?utm_source=founder-hashnode&utm_medium=social&utm_content=:content",
+      "permanent": false
     }
   ]
 }
