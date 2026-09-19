@@ -1,6 +1,6 @@
-# Installing compound-mcp
+# Installing kynth-mcp
 
-`compound-mcp` is eleven read-only lookup tools over live public data. There is **no API key, no
+`kynth-mcp` is eleven read-only lookup tools over live public data. There is **no API key, no
 signup and no account** — configuration is the command and nothing else.
 
 Most of the tools answer questions a model cannot answer correctly from a training cutoff,
@@ -14,18 +14,18 @@ still maintained, what a service's published price is this week.
   "mcpServers": {
     "compound": {
       "command": "npx",
-      "args": ["-y", "compound-mcp"]
+      "args": ["-y", "kynth-mcp"]
     }
   }
 }
 ```
 
 - **Cline**: add the block above to `cline_mcp_settings.json` (MCP Servers → Configure).
-- **Claude Code**: `claude mcp add compound -- npx -y compound-mcp`
+- **Claude Code**: `claude mcp add compound -- npx -y kynth-mcp`
 - **Claude Desktop**: same JSON in `claude_desktop_config.json` (Settings → Developer → Edit Config).
 - **Cursor / VS Code / Windsurf**: same JSON under their MCP settings.
 
-The server is also published in the official MCP registry as `studio.compound/compound-mcp`.
+The server is also published in the official MCP registry as `studio.kynth/kynth-mcp`.
 
 ## Verify the install
 
@@ -50,7 +50,7 @@ fields, the server is answering.
 ## Local HTTP mode (optional)
 
 ```sh
-npx -y compound-mcp --http 8974   # streamable HTTP on http://127.0.0.1:8974/mcp
+npx -y kynth-mcp --http 8974   # streamable HTTP on http://127.0.0.1:8974/mcp
 ```
 
 Loopback only, with DNS-rebinding protection on — it is for a local client, not for exposing
