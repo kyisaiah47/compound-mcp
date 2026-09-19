@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "studio.kynth/kynth-mcp",
+  "name": "tech.thecompound/compound-mcp",
   "title": "Compound Labs MCP",
   "description": "Compound Labs: eleven keyless lookups. Model pricing, dep health, stack cost, registries.",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "websiteUrl": "https://thecompound.tech",
   "repository": {
     "url": "https://github.com/kyisaiah47/compound-mcp",
@@ -14,15 +14,17 @@
     {
       "src": "https://raw.githubusercontent.com/kyisaiah47/compound-mcp/main/assets/compound-mcp-400.png",
       "mimeType": "image/png",
-      "sizes": ["400x400"]
+      "sizes": [
+        "400x400"
+      ]
     }
   ],
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "kynth-mcp",
-      "version": "0.4.0",
+      "identifier": "compound-mcp",
+      "version": "0.4.2",
       "transport": {
         "type": "stdio"
       }

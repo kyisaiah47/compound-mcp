@@ -1,8 +1,8 @@
 {
   "name": "compound-mcp",
-  "version": "0.4.0",
-  "mcpName": "studio.compound/compound-mcp",
-  "description": "MCP server from Compound Labs \u2014 eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
+  "version": "0.4.2",
+  "mcpName": "tech.thecompound/compound-mcp",
+  "description": "MCP server from Compound Labs, eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
   "type": "module",
   "license": "MIT",
   "author": "Compound Labs <hello@thecompound.tech>",

@@ -1,11 +1,11 @@
-# Where kynth-mcp and the ParseRail plugin are listed
+# Where compound-mcp and the ParseRail plugin are listed
 
 Re-read live 2026-09-19. Most of this surface is armed and watched by
 `compound.shared.mcpdir.tick` (`compound-ops/portals/mcpdir/tick.mjs`, every 6 hours), this file
 records state, it does not replace that job. Its own `state.json` is the live source; this is
 a snapshot plus the items that job does not cover.
 
-⛔ **THE PACKAGE IS CALLED `kynth-mcp` AND IT KEEPS THAT NAME.** This repo was renamed to
+⛔ **THE PACKAGE IS CALLED `compound-mcp` AND IT KEEPS THAT NAME.** This repo was renamed to
 compound-mcp on 2026-09-12 and npm never was, so for a week every install line in the repo, in
 `smithery.yaml` and in the mcpservers.org lane named a package that returned 404 while the one
 doing 427 downloads a month kept its old name. Isaiah settled it on 2026-09-19: the package
@@ -17,20 +17,20 @@ npm and is his call to make.
 registry row sat stale for a month.** MCP registry DNS auth verifies the reverse-DNS domain, so
 `studio.compound` means `compound.studio`, which is on Google Domains nameservers and is not in
 our Cloudflare account. The domains we hold are civicbinder.org, kynth.studio, outrip.lol,
-thecompound.tech and unemploy.co. The registry entry is `studio.kynth/kynth-mcp`, and the
+thecompound.tech and unemploy.co. The registry entry is `tech.thecompound/compound-mcp`, and the
 private key for that namespace is now in Bitwarden under "MCP Registry DNS auth (kynth.studio)".
 
-## kynth-mcp (eleven free, keyless, read-only tools)
+## compound-mcp (eleven free, keyless, read-only tools)
 
 | Directory | State | URL |
 | --- | --- | --- |
-| npm | live, `0.4.0`, 427 downloads in the 30 days to 2026-09-16 | https://www.npmjs.com/package/kynth-mcp |
-| Official MCP registry | live and current, `studio.kynth/kynth-mcp` 0.4.0, `isLatest` true, published 2026-09-19 | https://registry.modelcontextprotocol.io/v0/servers?search=studio.kynth/kynth-mcp |
-| Glama | live. Listing name `kynth-mcp`, hand entered description rewritten to Compound Labs 2026-09-19, repository re-synced | https://glama.ai/mcp/servers/fhf0eohm9v |
+| npm | live as `compound-mcp` `0.4.2`. `kynth-mcp` is deprecated on all 7 versions and points here; it carried 427 downloads in the 30 days to 2026-09-16 | https://www.npmjs.com/package/compound-mcp |
+| Official MCP registry | live and current, `tech.thecompound/compound-mcp` 0.4.0, `isLatest` true, published 2026-09-19 | https://registry.modelcontextprotocol.io/v0/servers?search=tech.thecompound/compound-mcp |
+| Glama | live. Listing name `compound-mcp`, hand entered description rewritten to Compound Labs 2026-09-19, repository re-synced | https://glama.ai/mcp/servers/fhf0eohm9v |
 | LobeHub | PASS | https://lobehub.com/mcp/kyisaiah47-compound-mcp |
-| mcpservers.org | listed, blurb STALE ("Ten keyless lookups"). A corrected free submission naming Compound Labs went in 2026-09-19, review within 2 weeks | https://mcpservers.org/search?query=kynth |
-| Smithery | NOT LISTED and not listable as it stands. `smithery.ai/servers/new` now asks for a namespace, a server id and an **MCP Server URL**, "the HTTP URL where your MCP server is accessible". There is no stdio or npx route on that form any more. kynth-mcp runs over stdio through npx and has no deployed public endpoint, so listing it needs a hosted Streamable HTTP instance first, which is the same prerequisite the Claude connectors directory wants below | https://smithery.ai/servers/new |
-| PulseMCP | NOT LISTED, and CLOSED. Searching `kynth-mcp` returns 0 of 0; searching `kynth` returns only Kynth Core, bylined "Kynth Studios". The site banner read live 2026-09-19: "New server submissions and listing changes are still paused while we rework how we ingest and manage listings." There is no submit or edit route to take until they reopen | https://www.pulsemcp.com/servers?q=kynth |
+| mcpservers.org | listed, blurb STALE ("Ten keyless lookups"). A corrected free submission naming Compound Labs went in 2026-09-19, review within 2 weeks | https://mcpservers.org/search?query=compound-mcp |
+| Smithery | NOT LISTED and not listable as it stands. `smithery.ai/servers/new` now asks for a namespace, a server id and an **MCP Server URL**, "the HTTP URL where your MCP server is accessible". There is no stdio or npx route on that form any more. compound-mcp runs over stdio through npx and has no deployed public endpoint, so listing it needs a hosted Streamable HTTP instance first, which is the same prerequisite the Claude connectors directory wants below | https://smithery.ai/servers/new |
+| PulseMCP | NOT LISTED, and CLOSED. Searching `compound-mcp` returns 0 of 0; searching `kynth` returns only Kynth Core, bylined "Kynth Studios". The site banner read live 2026-09-19: "New server submissions and listing changes are still paused while we rework how we ingest and manage listings." There is no submit or edit route to take until they reopen | https://www.pulsemcp.com/servers?q=compound-mcp |
 | mcp.so | UNRESOLVED, free route is a support ticket with no status surface, mcpdir job is chasing it | https://mcp.so/server/compound-mcp/kyisaiah47 |
 | Cursor Directory (cursor.directory) | NOT SUBMITTED, see below | https://cursor.directory/mcp |
 | Claude connectors directory | NOT PURSUED, see below | n/a |
