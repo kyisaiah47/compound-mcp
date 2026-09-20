@@ -113,6 +113,62 @@ Add to `claude_desktop_config.json` (Settings → Developer → Edit Config):
 }
 ```
 
+## Health
+
+Three facts, recorded separately, because a single health endpoint that ANDs them together
+cannot say which one broke.
+
+```sh
+npm run health          # the working tree, over stdio
+npm run health:public   # npx -y compound-mcp@latest, resolved fresh from npm
+```
+
+| Signal | What it answers |
+| --- | --- |
+| `initialize` | The process spawns and the MCP handshake completes. |
+| `tools_list` | The server enumerates its tools. An error and an empty list are both failures. |
+| `reachable` | Each public endpoint the tools read answers, right now. Recorded per host. |
+| `tool_outcome` | Calling a tool returns a usable payload. Separate from `tools_list` on purpose: a tool can be advertised and not work. |
+
+`--target public` is the deployment check, and it is deliberately outside CI. compound-mcp has
+no deployed HTTP endpoint, so the public path is npm: it spawns the published tarball through
+`npx`, with a throwaway cache and from a neutral directory, so what answers is what a stranger
+gets rather than this checkout. Build success and externally reachable protocol state are
+different facts, and this repo has already shipped a version where they disagreed.
+
+Every signal starts failed and is only flipped by evidence from that run. A timeout, a dead
+socket and a signal that could not be attempted are all failures carrying a reason, never a
+pass. A finding exits 0 so a scheduled run cannot disarm itself mid outage; `--strict` exits
+non zero and is what `ops/npm/publish.mjs` runs after publishing.
+
+Each run writes a dated receipt to `ops/health/receipts/`, and
+`ops/health/probe.test.mjs` breaks each signal on its own to prove the separation is real.
+
+Scheduled every 6 hours as `compound.compound-mcp.health`.
+
+## Receipts on the compliance tools
+
+`lookup_ada_report` and `lookup_nonprofit_status` return the verdict and the lookup as separate
+fields. `clear` and `grade` are the outcome. `checked` is the receipt: when the lookup ran,
+which lists or index were consulted, and what that coverage does not include, so an agent can
+explain what it verified without re-running it.
+
+```json
+{
+  "ein": "475262842",
+  "clear": true,
+  "checked": {
+    "at": "2026-09-20T14:36:34.257Z",
+    "sources": [
+      "IRS Automatic Revocation of Exemption List",
+      "California Attorney General Registry of Charities and Fundraisers"
+    ],
+    "via": "https://goodstanding.thecompound.tech/api/lookup",
+    "scope": "Covers only the two lists named above, as GoodStanding retains them. A clear result means the EIN is absent from those lists. It is not a statement that the organization was never revoked, and no other state registry is consulted."
+  }
+}
+```
+
 ## License
 
 MIT © Compound Labs

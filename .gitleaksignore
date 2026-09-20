@@ -1,3 +1,19 @@
 # Supabase PUBLISHABLE key (browser-safe by design; already served in the civicbinder.org bundle; RLS scopes reads)
 89513d286947cad1ee07f571497db550905fd7a5:src/server.js:generic-api-key:24
 src/server.js:generic-api-key:24
+
+# Same key, new line number. `export const SB_KEY` moved it from line 24 to line 37 in the
+# 0.5.0 health commit, and a gitleaks fingerprint is PINNED TO THE LINE, so the two entries
+# above stopped matching and the push was blocked on a finding this file had already settled.
+# Re-read 2026-09-20: it is an `sb_publishable_` key, the class Supabase designs to ship in
+# public clients, and RLS is what scopes the read.
+#
+# Only the commit-less form is written here, deliberately. A commit-pinned fingerprint cannot
+# be recorded in the commit it pins: writing the line changes the tree, which changes the SHA,
+# which invalidates the line just written. The commit-less form is SHA stable and is what
+# actually holds.
+#
+# Any future edit that moves this line needs its own entry. Do not answer that with a repo
+# `.gitleaks.toml`: the global pre-push hook checks for one first, and a local file silently
+# replaces the estate's stricter ruleset for this whole repo.
+src/server.js:generic-api-key:37

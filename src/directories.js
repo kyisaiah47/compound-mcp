@@ -12,7 +12,7 @@
 
 import { z } from 'zod';
 
-const API = {
+export const API = {
   rulestack: 'https://rulestack.thecompound.tech/api',
   skillworks: 'https://skillworks.thecompound.tech/api',
   blockdex: 'https://blockdex.thecompound.tech/api',

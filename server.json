@@ -3,7 +3,7 @@
   "name": "tech.thecompound/compound-mcp",
   "title": "Compound Labs MCP",
   "description": "Compound Labs: eleven keyless lookups. Model pricing, dep health, stack cost, registries.",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "websiteUrl": "https://thecompound.tech",
   "repository": {
     "url": "https://github.com/kyisaiah47/compound-mcp",
@@ -24,7 +24,7 @@
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "compound-mcp",
-      "version": "0.4.2",
+      "version": "0.5.0",
       "transport": {
         "type": "stdio"
       }

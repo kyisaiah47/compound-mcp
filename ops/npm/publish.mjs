@@ -188,3 +188,48 @@ try {
   process.exit(1);
 }
 console.log('\n✓ published to both');
+
+/* ── 6 · the post-publish check, against the PUBLIC path ─────────────────────────────────────
+ *
+ * Everything above this line compares bytes. It proves the tarball contains what the working
+ * tree contains, which is the right check and is not the same claim as "the thing a stranger
+ * installs answers an MCP client".
+ *
+ * @sasame-mcp.bsky.social, 2026-09-06: "One deployment check worth keeping outside CI is a
+ * fresh initialize + tools/list from the public path. Build success and externally reachable
+ * protocol state are surprisingly different facts."
+ *
+ * So the last thing a publish does is spawn what it just published, through npx, from a
+ * throwaway cache and a neutral directory, and complete a real handshake against it. A
+ * matching sha256 cannot tell you the entry point runs on someone else's machine. This can.
+ *
+ * --strict, so a publish that produced an unusable package exits non zero and says so, here,
+ * while the person who ran it is still looking. There is no breaker on a hand run to protect.
+ *
+ * npm's registry is read-through cached, so the version just pushed is not always resolvable
+ * the same second. The check retries rather than reporting a failure it created itself. */
+console.log('\n→ post-publish check against the public path');
+const PROBE = path.join(ROOT, 'ops/health/probe.mjs');
+let probeOk = false;
+for (let attempt = 1; attempt <= 3 && !probeOk; attempt++) {
+  if (attempt > 1) {
+    console.log(`  npm has not served ${pkg.version} yet, retrying in 20s (${attempt} of 3)`);
+    execFileSync('sleep', ['20']);
+  }
+  try {
+    execFileSync(
+      process.execPath,
+      [PROBE, '--target', 'public', '--version', pkg.version, '--strict'],
+      { cwd: ROOT, stdio: 'inherit' },
+    );
+    probeOk = true;
+  } catch {
+    /* the probe prints its own findings; the retry is only for registry propagation */
+  }
+}
+if (!probeOk) {
+  console.error(`\n✗ ${pkg.name}@${pkg.version} is published and did not answer from the public path.`);
+  console.error('  The bytes shipped. The server did not come up. See the receipt named above.');
+  process.exit(1);
+}
+console.log('\n✓ published, and the published artifact answers initialize and tools/list');

@@ -31,11 +31,11 @@ const PKG = JSON.parse(
   readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
 );
 
-const CB_SITE = 'https://civicbinder.org';
-const SB_URL = 'https://xowekqdsttxwbhfxvusa.supabase.co';
+export const CB_SITE = 'https://civicbinder.org';
+export const SB_URL = 'https://xowekqdsttxwbhfxvusa.supabase.co';
 // Supabase publishable key — designed to ship in public clients; RLS scopes reads.
-const SB_KEY = 'sb_publishable_9GvEPSkV3gyuyN02ZZJcig_gWo1j9LK';
-const GS_API = 'https://goodstanding.thecompound.tech/api/lookup';
+export const SB_KEY = 'sb_publishable_9GvEPSkV3gyuyN02ZZJcig_gWo1j9LK';
+export const GS_API = 'https://goodstanding.thecompound.tech/api/lookup';
 
 const ADA_COLUMNS = [
   'domain', 'entity_name', 'entity_type', 'state', 'city', 'population', 'deadline',
@@ -115,6 +115,61 @@ async function fetchNdjsonResult(url, headers = {}) {
   throw new Error('upstream returned no result frame');
 }
 
+/* ⛔ THE LOOKUP AND THE OUTCOME ARE TWO DIFFERENT FACTS, AND ONLY ONE OF THEM WAS EVER
+ * RETURNED.
+ *
+ * Asked for by @jithox.bsky.social on 2026-09-18: "For compliance workflows, I would also
+ * keep capability lookup separate from the actual outcome and retain a dated receipt so an
+ * agent can explain what was checked and when."
+ *
+ * Measured against the live endpoint on 2026-09-20, lookup_nonprofit_status returned
+ * `{ ein, clear: true, message, lookup_url }` and nothing else. The OUTCOME was there. What
+ * was CHECKED, and when, existed only inside an English sentence in `message`, which an agent
+ * cannot cite, cannot compare against a later run, and cannot put in a file. So an agent that
+ * had done a real check could not say what it had done, and an agent that had done nothing
+ * could produce the same sentence.
+ *
+ * `checked` is that receipt. It is deliberately separate from the verdict: `clear` is what
+ * came back, `checked` is what was consulted to get it, and a reader can disagree with the
+ * second without doubting the first.
+ *
+ * `scope` is the part that matters most and is the easiest to leave out. A nonprofit absent
+ * from these lists is not a nonprofit in good standing everywhere, it is a nonprofit absent
+ * from THESE lists. Stating the boundary is what makes the receipt safe to quote, and leaving
+ * it implicit is how a narrow check gets cited as a broad one.
+ *
+ * `at` is when the LOOKUP ran. Where the underlying record carries its own date, the ADA scan
+ * does with `scanned_at`, that stays on the row and is a different fact: one is when the
+ * evidence was gathered, the other is when it was consulted. A compliance answer needs both,
+ * and collapsing them is how a 2026 answer gets quoted off a 2025 scan.
+ *
+ * No error branch gets a receipt. A rejected domain or a malformed EIN means nothing was
+ * checked, and a receipt for a check that did not happen is worse than no receipt at all. */
+function receipt(sources, via, scope) {
+  return { at: new Date().toISOString(), sources, via, scope };
+}
+
+const ADA_RECEIPT = () =>
+  receipt(
+    ['CivicBinder Municipal Web Accessibility Index (axe-core, WCAG 2.1 AA)'],
+    `${SB_URL}/rest/v1/cb_ada_scans`,
+    'Covers US local-government websites that the index has scanned. The grade describes the ' +
+      'pages listed in pages_scanned as they were on scanned_at, not the site as it stands now, ' +
+      'and an automated scan cannot establish WCAG conformance on its own.',
+  );
+
+const GS_RECEIPT = () =>
+  receipt(
+    [
+      'IRS Automatic Revocation of Exemption List',
+      'California Attorney General Registry of Charities and Fundraisers',
+    ],
+    GS_API,
+    'Covers only the two lists named above, as GoodStanding retains them. A clear result means ' +
+      'the EIN is absent from those lists. It is not a statement that the organization was ' +
+      'never revoked, and no other state registry is consulted.',
+  );
+
 async function lookupAdaReport(rawDomain) {
   const domain = normalizeDomain(rawDomain);
   if (!DOMAIN_RE.test(domain)) {
@@ -133,6 +188,7 @@ async function lookupAdaReport(rawDomain) {
         `${domain} is not in the CivicBinder Municipal Web Accessibility Index yet. ` +
         `The index covers scanned US local-government .gov websites. ` +
         `Browse the full index at ${CB_SITE}/ada or the open dataset at ${CB_SITE}/ada/dataset.json.`,
+      checked: ADA_RECEIPT(),
     };
   }
   return {
@@ -156,6 +212,7 @@ async function lookupAdaReport(rawDomain) {
     axe_version: row.axe_version,
     pages_scanned: row.pages_scanned,
     report_url: `${CB_SITE}/ada/${row.domain}`,
+    checked: ADA_RECEIPT(),
   };
 }
 
@@ -174,6 +231,7 @@ async function lookupNonprofitStatus(rawEin) {
         `California registry delinquency/suspension lists that GoodStanding tracks. ` +
         `On those lists, this organization reads as in good standing. ` +
         `Full check: https://goodstanding.thecompound.tech/#lookup`,
+      checked: GS_RECEIPT(),
     };
   }
   return {
@@ -181,6 +239,7 @@ async function lookupNonprofitStatus(rawEin) {
     clear: false,
     results: data.results,
     lookup_url: 'https://goodstanding.thecompound.tech/#lookup',
+    checked: GS_RECEIPT(),
   };
 }
 
@@ -202,7 +261,9 @@ export function buildServer() {
         'counts from an axe-core scan, the failing rules, the entity\'s ADA Title II ' +
         'compliance deadline (April 2027 or April 2028), and a link to the full public ' +
         'report page. Use for questions like "is cityofx.gov ADA compliant" or "how ' +
-        'accessible is this county website".',
+        'accessible is this county website". Every answer carries a `checked` receipt: when ' +
+        'the lookup ran, which index was consulted, and what that index does and does not ' +
+        'cover, so the check can be cited later without being re-run.',
       inputSchema: {
         domain: z
           .string()
@@ -223,7 +284,9 @@ export function buildServer() {
         'California Registry of Charities delinquency/suspension lists. Returns revocation ' +
         'and reinstatement dates, whether the streamlined 15-month reinstatement window is ' +
         'still open, and whether AB 488 requires fundraising platforms to block donations. ' +
-        'A "clear" result means the EIN is on none of the tracked lists.',
+        'A "clear" result means the EIN is on none of the tracked lists. The verdict and the ' +
+        'lookup are separate fields: `clear` is the outcome, and the `checked` receipt records ' +
+        'when the lookup ran, which lists were consulted, and the limits of that coverage.',
       inputSchema: {
         ein: z
           .string()

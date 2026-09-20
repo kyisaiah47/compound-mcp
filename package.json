@@ -1,6 +1,6 @@
 {
   "name": "compound-mcp",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "mcpName": "tech.thecompound/compound-mcp",
   "description": "MCP server from Compound Labs, eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
   "type": "module",
@@ -53,7 +53,11 @@
   },
   "scripts": {
     "start": "node bin/compound-mcp.js",
-    "start:http": "node bin/compound-mcp.js --http 8974"
+    "start:http": "node bin/compound-mcp.js --http 8974",
+    "test": "node test/smoke.mjs && node test/directories.mjs && node ops/health/probe.test.mjs",
+    "health": "node ops/health/probe.mjs",
+    "health:public": "node ops/health/probe.mjs --target public",
+    "health:test": "node ops/health/probe.test.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
