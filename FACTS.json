@@ -1,0 +1,32 @@
+{
+  "claims": [
+    {
+      "id": "ada-title-ii-web-deadlines",
+      "claim": "ADA Title II web accessibility compliance deadlines for state and local governments",
+      "value": "April 26, 2027 for entities with populations of 50,000 or more; April 26, 2028 for entities under 50,000 and special districts",
+      "kind": "deadline",
+      "sourceUrl": "https://www.ada.gov/resources/2024-03-08-web-rule/",
+      "sourceTitle": "ADA.gov — Fact Sheet: New Rule on the Accessibility of Web Content and Mobile Apps Provided by State and Local Governments",
+      "asOf": "2026-09-30",
+      "appearsOn": [
+        "https://compound-mcp.thecompound.tech/"
+      ],
+      "lastVerified": "2026-09-30",
+      "status": "verified"
+    },
+    {
+      "id": "irs-auto-revocation-three-years",
+      "claim": "IRS automatic revocation after required annual filings are missed for three consecutive years",
+      "value": "Tax-exempt status is automatically revoked effective on the original filing due date of the third consecutive annual return or notice",
+      "kind": "rule",
+      "sourceUrl": "https://www.irs.gov/charities-non-profits/automatic-revocation-of-exemption",
+      "sourceTitle": "IRS — Automatic revocation of exemption",
+      "asOf": "2026-09-30",
+      "appearsOn": [
+        "https://compound-mcp.thecompound.tech/"
+      ],
+      "lastVerified": "2026-09-30",
+      "status": "verified"
+    }
+  ]
+}
