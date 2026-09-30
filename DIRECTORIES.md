@@ -42,16 +42,16 @@ is ours (junct-bot's Compound Finance server, PubChem, DeFi Rates and so on), an
 `?q=compound` returns 14 in the same shape. Both rows now search `kynth`, which is the word only
 our listings carry.
 
-## ParseRail plugin / @compound/api-mcp (compound-claude-plugin repo)
+## ParseRail plugin / parserail-mcp (compound-claude-plugin repo)
 
 | Directory | State | URL |
 | --- | --- | --- |
 | Self-hosted marketplace (GitHub) | live | https://github.com/kyisaiah47/compound-claude-plugin |
-| npm (`@compound/api-mcp`) | live, `0.5.2`, published from the parserail repo, out of this repo's scope | https://www.npmjs.com/package/@compound/api-mcp |
-| Official MCP registry (`studio.compound/core`) | live, `0.5.2`, current | https://registry.modelcontextprotocol.io/v0/servers?search=studio.compound/core |
+| npm (`parserail-mcp`) | live, `0.5.5`, published from the parserail repo, out of this repo's scope | https://www.npmjs.com/package/parserail-mcp |
+| Official MCP registry (`tech.thecompound/parserail-mcp`) | live, `0.5.5`, current | https://registry.modelcontextprotocol.io/v0/servers?search=parserail |
 | Anthropic's official Claude Code plugin directory (github.com/anthropics/claude-plugins-official) | **submitted 2026-08-14, under review.** Tracked in `compound-ops/portals/mcpdir/tick.mjs`, the `HOLDS` list, under the pre-rename name "Compound Core" and slug `compound-core`. The plugin itself renamed to ParseRail 2026-09-04 (`marketplace.json` carries a `renames` migration); the submission's own answers were deliberately left on the old name per that file's own rule (renaming mid-review is worse than the inconsistency). The due date on that hold is 2026-09-04, today, worth a status check on the next mcpdir tick. | n/a, Console wizard, no public listing URL until approved |
 | Claude connectors directory | NOT PURSUED, see below | n/a |
-| Smithery, mcpmarket.com, n8n Creator Portal, Zapier, Gemini CLI gallery | covered by the mcpdir job for `studio.compound/core`, not duplicated here | see `compound-ops/portals/mcpdir/state.json` |
+| Smithery, mcpmarket.com, n8n Creator Portal, Zapier, Gemini CLI gallery | covered by the mcpdir job for `tech.thecompound/parserail-mcp`, not duplicated here | see `compound-ops/portals/mcpdir/state.json` |
 
 ## Claude connectors directory: not pursued, for both
 
