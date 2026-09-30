@@ -16,21 +16,21 @@ npm and is his call to make.
 ⛔ **THE `studio.compound` NAMESPACE WAS NEVER OURS TO PUBLISH UNDER, and that is why the
 registry row sat stale for a month.** MCP registry DNS auth verifies the reverse-DNS domain, so
 `studio.compound` means `compound.studio`, which is on Google Domains nameservers and is not in
-our Cloudflare account. The domains we hold are civicbinder.org, kynth.studio, outrip.lol,
+our Cloudflare account. The domains we hold are civicbinder.org, the retired studio domain, outrip.lol,
 thecompound.tech and unemploy.co. The registry entry is `tech.thecompound/compound-mcp`, and the
-private key for that namespace is now in Bitwarden under "MCP Registry DNS auth (kynth.studio)".
+private key for that namespace is now in Bitwarden under the item "MCP Registry DNS auth" (`compound-vault find "MCP Registry DNS auth"`).
 
 ## compound-mcp (eleven free, keyless, read-only tools)
 
 | Directory | State | URL |
 | --- | --- | --- |
-| npm | live as `compound-mcp` `0.4.2`. `kynth-mcp` is deprecated on all 7 versions and points here; it carried 427 downloads in the 30 days to 2026-09-16 | https://www.npmjs.com/package/compound-mcp |
+| npm | live as `compound-mcp` `0.4.2`. The old-name package is deprecated on all 7 versions and points here; it carried 427 downloads in the 30 days to 2026-09-16 | https://www.npmjs.com/package/compound-mcp |
 | Official MCP registry | live and current, `tech.thecompound/compound-mcp` 0.4.0, `isLatest` true, published 2026-09-19 | https://registry.modelcontextprotocol.io/v0/servers?search=tech.thecompound/compound-mcp |
 | Glama | live. Listing name `compound-mcp`, hand entered description rewritten to Compound Labs 2026-09-19, repository re-synced | https://glama.ai/mcp/servers/fhf0eohm9v |
 | LobeHub | PASS | https://lobehub.com/mcp/kyisaiah47-compound-mcp |
 | mcpservers.org | listed, blurb STALE ("Ten keyless lookups"). A corrected free submission naming Compound Labs went in 2026-09-19, review within 2 weeks | https://mcpservers.org/search?query=compound-mcp |
 | Smithery | NOT LISTED and not listable as it stands. `smithery.ai/servers/new` now asks for a namespace, a server id and an **MCP Server URL**, "the HTTP URL where your MCP server is accessible". There is no stdio or npx route on that form any more. compound-mcp runs over stdio through npx and has no deployed public endpoint, so listing it needs a hosted Streamable HTTP instance first, which is the same prerequisite the Claude connectors directory wants below | https://smithery.ai/servers/new |
-| PulseMCP | NOT LISTED, and CLOSED. Searching `compound-mcp` returns 0 of 0; searching `kynth` returns only Kynth Core, bylined "Kynth Studios". The site banner read live 2026-09-19: "New server submissions and listing changes are still paused while we rework how we ingest and manage listings." There is no submit or edit route to take until they reopen | https://www.pulsemcp.com/servers?q=compound-mcp |
+| PulseMCP | NOT LISTED, and CLOSED. Searching `compound-mcp` returns 0 of 0; searching the retired studio name returns only our old-name Core listing, bylined with the retired studio name. The site banner read live 2026-09-19: "New server submissions and listing changes are still paused while we rework how we ingest and manage listings." There is no submit or edit route to take until they reopen | https://www.pulsemcp.com/servers?q=compound-mcp |
 | mcp.so | UNRESOLVED, free route is a support ticket with no status surface, mcpdir job is chasing it | https://mcp.so/server/compound-mcp/kyisaiah47 |
 | Cursor Directory (cursor.directory) | NOT SUBMITTED, see below | https://cursor.directory/mcp |
 | Claude connectors directory | NOT PURSUED, see below | n/a |
@@ -39,7 +39,7 @@ private key for that namespace is now in Bitwarden under "MCP Registry DNS auth 
 reported PASS for both mcpservers.org and PulseMCP off `/compound/i` against a results page.
 Read live 2026-09-19, mcpservers.org's `?query=compound` returns 13 servers and not one of them
 is ours (junct-bot's Compound Finance server, PubChem, DeFi Rates and so on), and PulseMCP's
-`?q=compound` returns 14 in the same shape. Both rows now search `kynth`, which is the word only
+`?q=compound` returns 14 in the same shape. Both rows now search the retired studio name, which is the word only
 our listings carry.
 
 ## ParseRail plugin / parserail-mcp (compound-claude-plugin repo)
