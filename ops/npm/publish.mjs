@@ -30,7 +30,7 @@
 // override is how a gate becomes a formality.
 
 import { execFileSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
+import { createHash, createPrivateKey } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -173,12 +173,46 @@ if (DRY) {
 }
 
 /* ── 5 · publish ─────────────────────────────────────────────────────────────────────────────── */
-console.log('\n→ npm publish');
+// Sign in to the MCP registry BEFORE npm publish, so a failed sign-in publishes nothing and npm
+// never gets ahead of the registry. The registry token mcp-publisher caches in
+// ~/.config/mcp-publisher/token.json is short-lived: the one on disk on 2026-10-02 had expired on
+// 2026-09-21, and `mcp-publisher publish` refused it with 401. So every run signs in again with the
+// DNS key for the tech.thecompound namespace. compound-secret resolves it from Bitwarden Secrets
+// Manager (MCP_REGISTRY_DNS_KEY_2_THECOMPOUND, 64 hex characters, public half in the
+// thecompound.tech TXT record). The PEM file it was copied from is the fallback when Bitwarden
+// cannot answer. The key is passed only to mcp-publisher and is never printed: an execFileSync
+// error message carries the full argv, so the catch prints stderr, never e.message.
+function registryKeyHex() {
+  try {
+    const v = execFileSync(path.join(os.homedir(), 'bin', 'compound-secret'), ['MCP_REGISTRY_DNS_KEY_2_THECOMPOUND'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    if (/^[0-9a-f]{64}$/.test(v)) return v;
+  } catch {}
+  const pem = path.join(os.homedir(), '.config/compound-mcp/thecompound-tech-mcp-ed25519.pem');
+  if (!fs.existsSync(pem)) return null;
+  return createPrivateKey(fs.readFileSync(pem)).export({ format: 'der', type: 'pkcs8' }).subarray(-32).toString('hex');
+}
+console.log('\n→ mcp-publisher login dns --domain thecompound.tech');
+const registryKey = registryKeyHex();
+if (!registryKey) {
+  console.error('✗ no MCP registry key: compound-secret MCP_REGISTRY_DNS_KEY_2_THECOMPOUND failed and the PEM fallback is missing');
+  process.exit(1);
+}
+try {
+  run('mcp-publisher', ['login', 'dns', '--domain', 'thecompound.tech', '--private-key', registryKey]);
+} catch (e) {
+  console.error(`✗ MCP registry sign-in failed: ${String(e.stderr || '').trim().split('\n').pop()}`);
+  console.error('  nothing was published.');
+  process.exit(1);
+}
+
+console.log('→ npm publish');
 console.log(run('npm', ['publish', '--access', 'public'], { stdio: ['ignore', 'pipe', 'inherit'] }));
 
 // The MCP registry is the half that was three versions stale, so it is not optional here and a
-// failure is loud. mcp-publisher authenticates interactively the first time; after that the token
-// is cached in ~/.mcp-publisher.
+// failure is loud.
 console.log('→ mcp-publisher publish');
 try {
   console.log(run('mcp-publisher', ['publish'], { stdio: ['ignore', 'pipe', 'inherit'] }));
