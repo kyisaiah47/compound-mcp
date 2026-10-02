@@ -2,7 +2,7 @@
   "name": "openlookup",
   "version": "0.5.1",
   "mcpName": "tech.thecompound/openlookup",
-  "description": "OpenLookup, an MCP server from Compound Labs: eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
+  "description": "OpenLookup is an MCP server from Compound Labs. It provides eleven read-only lookups over live public data. The lookups cover agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. OpenLookup requires no key and no signup.",
   "type": "module",
   "license": "MIT",
   "author": "Compound Labs <hello@thecompound.tech>",

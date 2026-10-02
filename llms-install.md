@@ -1,6 +1,6 @@
 # Installing OpenLookup
 
-`openlookup` is eleven read-only lookup tools over live public data. There is **no API key, no
+`openlookup` provides eleven read-only lookup tools over live public data. There is **no API key, no
 signup and no account** — configuration is the command and nothing else.
 
 Most of the tools answer questions a model cannot answer correctly from a training cutoff,
