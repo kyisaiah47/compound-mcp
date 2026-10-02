@@ -6,11 +6,11 @@ MCP server from [Compound Labs](https://thecompound.tech). Eleven read-only look
 
 OpenLookup was published on npm as `compound-mcp` until 2026-10-02. That package is deprecated and points here. Install `openlookup` instead.
 
-Most of these answer questions that a model cannot answer correctly from a training cutoff, because the underlying fact changed after it: what a model costs today, whether a library is still maintained, whether someone has already published the skill you are about to write.
+Most OpenLookup tools answer questions that a model cannot answer correctly from its training cutoff. The underlying facts change after training, including current model costs, library maintenance, and whether someone has published a skill you plan to write.
 
 ## Tools
 
-### Things that go stale
+### Facts that change over time
 
 | Tool | Answers |
 | --- | --- |
@@ -33,9 +33,9 @@ Most of these answer questions that a model cannot answer correctly from a train
 
 ### `lookup_ada_report(domain)`
 
-Looks up a US local-government domain in the [CivicBinder Municipal Web Accessibility Index](https://civicbinder.org/ada) — axe-core scans of local-government .gov websites, graded A–F against WCAG 2.1 AA ahead of the ADA Title II deadlines (April 26, 2027 for communities of 50,000+; April 26, 2028 for smaller communities and special districts).
+OpenLookup looks up a US local-government domain in the [[CivicBinder Municipal Web Accessibility Index](https://civicbinder.org/ada)](https://civicbinder.org/ada). The index uses axe-core scans of local-government .gov websites and grades them A–F against WCAG 2.1 AA. The index applies the April 26, 2027 ADA Title II deadline to communities of 50,000+ and the April 26, 2028 deadline to smaller communities and special districts.
 
-Returns the grade, violation counts (total / serious / critical), the top failing rules, the entity's deadline, and the public report page (`https://civicbinder.org/ada/<domain>`). The full index is also published as an open dataset at [civicbinder.org/ada/dataset.json](https://civicbinder.org/ada/dataset.json).
+The tool returns the grade, violation counts (total / serious / critical), the top failing rules, the entity's deadline, and the public report page (`https://civicbinder.org/ada/<domain>`). The full index is also published as an open dataset at [[civicbinder.org/ada/dataset.json](https://civicbinder.org/ada/dataset.json)](https://civicbinder.org/ada/dataset.json).
 
 ### `lookup_nonprofit_status(ein)`
 
@@ -64,7 +64,7 @@ claude mcp add openlookup -- npx -y openlookup
 
 ## Claude Desktop
 
-Add to `claude_desktop_config.json` (Settings → Developer → Edit Config):
+Add the server to `claude_desktop_config.json` in Settings → Developer → Edit Config:
 
 ```json
 {
@@ -117,8 +117,8 @@ Add to `claude_desktop_config.json` (Settings → Developer → Edit Config):
 
 ## Health
 
-Three facts, recorded separately, because a single health endpoint that ANDs them together
-cannot say which one broke.
+The health check records three facts separately. A single health endpoint that ANDs them
+together cannot identify which fact failed.
 
 ```sh
 npm run health          # the working tree, over stdio
@@ -138,22 +138,25 @@ no deployed HTTP endpoint, so the public path is npm: it spawns the published ta
 gets rather than this checkout. Build success and externally reachable protocol state are
 different facts, and this repo has already shipped a version where they disagreed.
 
-Every signal starts failed and is only flipped by evidence from that run. A timeout, a dead
-socket and a signal that could not be attempted are all failures carrying a reason, never a
-pass. A finding exits 0 so a scheduled run cannot disarm itself mid outage; `--strict` exits
-non zero and is what `ops/npm/publish.mjs` runs after publishing.
+Every signal starts failed. The health check flips a signal only when that run provides
+evidence for it. A timeout, a dead socket, and a signal that could not be attempted all
+remain failures with a reason. None of them becomes a pass. A finding exits 0 so a scheduled
+run cannot disarm itself during an outage. `--strict` exits non zero, and
+`ops/npm/publish.mjs` runs it after publishing.
 
-Each run writes a dated receipt to `ops/health/receipts/`, and
-`ops/health/probe.test.mjs` breaks each signal on its own to prove the separation is real.
+Each run writes a dated receipt to `ops/health/receipts/`. The test at
+`ops/health/probe.test.mjs` breaks each signal separately and verifies that the health
+check keeps them separate.
 
 Scheduled every 6 hours as `compound.compound-mcp.health`.
 
-## Receipts on the compliance tools
+## Compliance tool receipts
 
-`lookup_ada_report` and `lookup_nonprofit_status` return the verdict and the lookup as separate
-fields. `clear` and `grade` are the outcome. `checked` is the receipt: when the lookup ran,
-which lists or index were consulted, and what that coverage does not include, so an agent can
-explain what it verified without re-running it.
+`lookup_ada_report` and `lookup_nonprofit_status` return the verdict and the lookup in separate
+fields. `clear` and `grade` contain the outcome. `checked` contains the receipt. The receipt
+records when the lookup ran, which lists or index it consulted, and what that coverage does not
+include. An agent can use the receipt to explain what it verified without running the lookup
+again.
 
 ```json
 {
