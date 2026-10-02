@@ -1,4 +1,4 @@
-// compound-mcp — MCP server for Compound Labs compliance lookups.
+// openlookup — MCP server for Compound Labs compliance lookups.
 //
 // Two tools, both backed by live public data:
 //
@@ -246,7 +246,7 @@ async function lookupNonprofitStatus(rawEin) {
 /** Build the McpServer with every tool registered. One instance per connection. */
 export function buildServer() {
   const server = new McpServer({
-    name: 'compound-mcp',
+    name: 'openlookup',
     version: PKG.version,
   });
 

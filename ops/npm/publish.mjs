@@ -127,7 +127,7 @@ let live = new Map();
 let livePublished = null;
 try {
   livePublished = run('npm', ['view', `${pkg.name}`, 'version']).trim();
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'compound-mcp-live-'));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'openlookup-live-'));
   const tgz = run('npm', ['pack', `${pkg.name}@${livePublished}`, '--pack-destination', tmp]).trim().split('\n').pop();
   run('tar', ['-xzf', path.join(tmp, tgz), '-C', tmp]);
   const pkgDir = path.join(tmp, 'package');

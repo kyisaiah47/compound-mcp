@@ -149,7 +149,7 @@ const CASES = [
   {
     title: 'fail closed: a target that cannot spawn at all is a FAILURE with a reason',
     run: () =>
-      run('ok', { command: '/nonexistent/compound-mcp-does-not-exist', args: [], handshakeTimeoutMs: 8_000 }),
+      run('ok', { command: '/nonexistent/openlookup-does-not-exist', args: [], handshakeTimeoutMs: 8_000 }),
     assert: (r) => [
       ['initialize failed', !r.signals.initialize.ok],
       ['a reason was recorded', Boolean(r.signals.initialize.reason)],
@@ -168,7 +168,7 @@ const CASES = [
   },
 ];
 
-console.log('compound-mcp health probe, signal independence\n');
+console.log('openlookup health probe, signal independence\n');
 
 for (const c of CASES) {
   let r;

@@ -1,8 +1,8 @@
 {
-  "name": "compound-mcp",
-  "version": "0.5.0",
-  "mcpName": "tech.thecompound/compound-mcp",
-  "description": "MCP server from Compound Labs, eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
+  "name": "openlookup",
+  "version": "0.5.1",
+  "mcpName": "tech.thecompound/openlookup",
+  "description": "OpenLookup, an MCP server from Compound Labs: eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
   "type": "module",
   "license": "MIT",
   "author": "Compound Labs <hello@thecompound.tech>",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kyisaiah47/compound-mcp.git"
+    "url": "git+https://github.com/kyisaiah47/openlookup.git"
   },
   "keywords": [
     "mcp",
@@ -40,7 +40,7 @@
     "expo"
   ],
   "bin": {
-    "compound-mcp": "bin/compound-mcp.js"
+    "openlookup": "bin/openlookup.js"
   },
   "files": [
     "bin",
@@ -52,8 +52,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "start": "node bin/compound-mcp.js",
-    "start:http": "node bin/compound-mcp.js --http 8974",
+    "start": "node bin/openlookup.js",
+    "start:http": "node bin/openlookup.js --http 8974",
     "test": "node test/smoke.mjs && node test/directories.mjs && node ops/health/probe.test.mjs",
     "health": "node ops/health/probe.mjs",
     "health:public": "node ops/health/probe.mjs --target public",

@@ -1,26 +1,26 @@
-# Where compound-mcp and the ParseRail plugin are listed
+# Where OpenLookup and the ParseRail plugin are listed
 
 Re-read live 2026-09-19. Most of this surface is armed and watched by
 `compound.shared.mcpdir.tick` (`compound-ops/portals/mcpdir/tick.mjs`, every 6 hours), this file
 records state, it does not replace that job. Its own `state.json` is the live source; this is
 a snapshot plus the items that job does not cover.
 
-⛔ **THE PACKAGE IS CALLED `compound-mcp` AND IT KEEPS THAT NAME.** This repo was renamed to
-compound-mcp on 2026-09-12 and npm never was, so for a week every install line in the repo, in
-`smithery.yaml` and in the mcpservers.org lane named a package that returned 404 while the one
-doing 427 downloads a month kept its old name. Isaiah settled it on 2026-09-19: the package
-name stays, the BRANDING is what moves to Compound Labs. `package.json` still carries
-`"name": "compound-mcp"` and a `compound-mcp` bin, which is the one thing left disagreeing with
-npm and is his call to make.
+⛔ **THE PACKAGE IS CALLED `openlookup` SINCE 2026-10-02.** The estate plan, section 3 of
+`compound-ops/agents/PLAN.md`, renamed compound-mcp to OpenLookup. The GitHub repo moved to
+kyisaiah47/openlookup, and npm publishes `openlookup` with an `openlookup` bin. The `compound-mcp`
+package is deprecated with a pointer to `openlookup`. The MCP registry entry is
+`tech.thecompound/openlookup`. The directory rows below were read on 2026-09-19 under the old
+name, and each one keeps it until that directory re-indexes the renamed repo. Before the rename,
+Isaiah had kept the npm name `compound-mcp` on 2026-09-19 while the branding moved to Compound Labs.
 
 ⛔ **THE `studio.compound` NAMESPACE WAS NEVER OURS TO PUBLISH UNDER, and that is why the
 registry row sat stale for a month.** MCP registry DNS auth verifies the reverse-DNS domain, so
 `studio.compound` means `compound.studio`, which is on Google Domains nameservers and is not in
 our Cloudflare account. The domains we hold are civicbinder.org, the retired studio domain, outrip.lol,
-thecompound.tech and unemploy.co. The registry entry is `tech.thecompound/compound-mcp`, and the
+thecompound.tech and unemploy.co. The registry entry is `tech.thecompound/openlookup`, and the
 private key for that namespace is now in Bitwarden under the item "MCP Registry DNS auth" (`compound-vault find "MCP Registry DNS auth"`).
 
-## compound-mcp (eleven free, keyless, read-only tools)
+## OpenLookup, formerly compound-mcp (eleven free, keyless, read-only tools)
 
 | Directory | State | URL |
 | --- | --- | --- |

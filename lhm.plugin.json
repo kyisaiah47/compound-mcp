@@ -1,9 +1,9 @@
 {
   "author": "Compound Labs",
-  "description": "MCP server from Compound Labs — eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
+  "description": "OpenLookup, an MCP server from Compound Labs: eleven read-only lookups over live public data: agent skills and configs, shadcn component registries, AI model pricing and routing, dependency maintenance status, SaaS pricing and stack cost estimates, AI app-builder App Store readiness, ADA Title II accessibility reports, and nonprofit good-standing checks. No key, no signup.",
   "homepage": "https://thecompound.tech",
-  "identifier": "kyisaiah47-compound-mcp",
-  "name": "compound-mcp",
+  "identifier": "kyisaiah47-openlookup",
+  "name": "openlookup",
   "prompts": [],
   "resources": [],
   "tags": [
@@ -29,7 +29,7 @@
     {
       "name": "lookup_ada_report",
       "title": "Look up an ADA Title II website accessibility report",
-      "description": "Look up a US local-government (.gov) domain in the CivicBinder Municipal Web Accessibility Index. Returns the accessibility grade (A-F), WCAG 2.1 AA violation counts from an axe-core scan, the failing rules, the entity's ADA Title II compliance deadline (April 2027 or April 2028), and a link to the full public report page. Use for questions like \"is cityofx.gov ADA compliant\" or \"how accessible is this county website\".",
+      "description": "Look up a US local-government (.gov) domain in the CivicBinder Municipal Web Accessibility Index. Returns the accessibility grade (A-F), WCAG 2.1 AA violation counts from an axe-core scan, the failing rules, the entity's ADA Title II compliance deadline (April 2027 or April 2028), and a link to the full public report page. Use for questions like \"is cityofx.gov ADA compliant\" or \"how accessible is this county website\". Every answer carries a `checked` receipt: when the lookup ran, which index was consulted, and what that index does and does not cover, so the check can be cited later without being re-run.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -51,7 +51,7 @@
     {
       "name": "lookup_nonprofit_status",
       "title": "Look up nonprofit IRS / California good standing by EIN",
-      "description": "Check a US nonprofit's standing by EIN against the IRS auto-revocation list (tax-exempt status revoked for three consecutive missed Form 990 filings) and California Registry of Charities delinquency/suspension lists. Returns revocation and reinstatement dates, whether the streamlined 15-month reinstatement window is still open, and whether AB 488 requires fundraising platforms to block donations. A \"clear\" result means the EIN is on none of the tracked lists.",
+      "description": "Check a US nonprofit's standing by EIN against the IRS auto-revocation list (tax-exempt status revoked for three consecutive missed Form 990 filings) and California Registry of Charities delinquency/suspension lists. Returns revocation and reinstatement dates, whether the streamlined 15-month reinstatement window is still open, and whether AB 488 requires fundraising platforms to block donations. A \"clear\" result means the EIN is on none of the tracked lists. The verdict and the lookup are separate fields: `clear` is the outcome, and the `checked` receipt records when the lookup ran, which lists were consulted, and the limits of that coverage.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -118,7 +118,7 @@
           },
           "kind": {
             "type": "string",
-            "description": "Filter to one of: skill, plugin, marketplace."
+            "description": "Filter to one of: skill, subagent, plugin, marketplace."
           },
           "limit": {
             "type": "number",
@@ -148,7 +148,11 @@
           },
           "kind": {
             "type": "string",
-            "description": "Filter by item kind, e.g. \"ui\", \"block\", \"hook\", \"lib\"."
+            "description": "Filter by item kind: component, block, hook, example, lib, theme, other."
+          },
+          "access": {
+            "type": "string",
+            "description": "Filter by whether the item is free to install: free, paid, unknown."
           },
           "limit": {
             "type": "number",
@@ -311,5 +315,5 @@
       }
     }
   ],
-  "version": "0.3.0"
+  "version": "0.5.1"
 }

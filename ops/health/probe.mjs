@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// ops/health/probe.mjs, the compound-mcp health probe.
+// ops/health/probe.mjs, the openlookup health probe.
 //
 //   node ops/health/probe.mjs                     the working tree, over stdio
-//   node ops/health/probe.mjs --target public     npx -y compound-mcp@latest, from npm
+//   node ops/health/probe.mjs --target public     npx -y openlookup@latest, from npm
 //   node ops/health/probe.mjs --target public --strict     non zero exit on any failing signal
 //   node ops/health/probe.mjs --json              the receipt on stdout, nothing else
 //
@@ -44,9 +44,9 @@
 // initialize + tools/list from the public path. Build success and externally reachable
 // protocol state are surprisingly different facts."
 //
-// compound-mcp has no deployed HTTP endpoint. Read live 2026-09-20, mcp.thecompound.tech is a
+// openlookup has no deployed HTTP endpoint. Read live 2026-09-20, mcp.thecompound.tech is a
 // wildcard 307 to the apex and answers no JSON-RPC at all. The public path is npm: every user
-// of this server runs `npx -y compound-mcp`, so the published tarball on registry.npmjs.org
+// of this server runs `npx -y openlookup`, so the published tarball on registry.npmjs.org
 // IS the externally reachable protocol state, and the working tree is the build.
 //
 // Those two have already disagreed in this repo. ops/npm/publish.mjs was written because on
@@ -123,7 +123,7 @@ const UPSTREAMS = [
   { name: 'storeready', url: `${API.storeready}/builders` },
 ];
 
-const NPM_REGISTRY = { name: 'npm-registry', url: 'https://registry.npmjs.org/compound-mcp' };
+const NPM_REGISTRY = { name: 'npm-registry', url: 'https://registry.npmjs.org/openlookup' };
 
 /* Capability says these tools exist. These calls say whether they answer. Each case names a
  * key its own tool description promises, because a tool returning 200 and a row with every
@@ -144,7 +144,7 @@ const passed = (extra = {}) => ({ ok: true, reason: null, ...extra });
 /** Resolve what the public path is serving right now, straight from the registry. */
 async function resolvePublishedVersion(fetchImpl, spec) {
   if (spec && spec !== 'latest') return { version: spec, resolved_from: 'argument' };
-  const res = await fetchImpl('https://registry.npmjs.org/compound-mcp', {
+  const res = await fetchImpl('https://registry.npmjs.org/openlookup', {
     headers: { accept: 'application/json' },
     signal: AbortSignal.timeout(HTTP_TIMEOUT_MS),
   });
@@ -281,29 +281,29 @@ export async function probe(opts = {}) {
     /* A throwaway cache, so the artifact under test is fetched from registry.npmjs.org on this
      * run. A warm ~/.npm would let a local copy answer and the probe would call the public
      * path healthy without ever touching it. */
-    cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), 'compound-mcp-probe-'));
+    cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), 'openlookup-probe-'));
 
     /* ⛔ AND IT RUNS FROM A NEUTRAL DIRECTORY, NEVER THE REPO. Measured 2026-09-20: spawned
      * with cwd inside this package, npx reads the local package.json, sees it declares a
-     * `compound-mcp` bin, resolves the name to node_modules/.bin/compound-mcp, which does not
+     * `openlookup` bin, resolves the name to node_modules/.bin/openlookup, which does not
      * exist because the package is not installed into itself, and dies with
-     * "sh: compound-mcp: command not found". The published tarball was fine the whole time.
+     * "sh: openlookup: command not found". The published tarball was fine the whole time.
      *
      * That is worth more than the one line that fixes it. A public path check run from inside
      * the source tree is not checking the public path, it is checking the checkout with extra
      * steps, and it can fail or PASS for reasons no user will ever encounter. The neutral cwd
      * is what makes this the same command a stranger runs. */
-    cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'compound-mcp-probe-cwd-'));
+    cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'openlookup-probe-cwd-'));
 
     command = 'npx';
-    args = ['-y', `compound-mcp@${receipt.published_version}`];
+    args = ['-y', `openlookup@${receipt.published_version}`];
     spawnEnv = { ...spawnEnv, npm_config_cache: cacheDir, npm_config_update_notifier: 'false' };
-    receipt.target_command = `npx -y compound-mcp@${receipt.published_version}`;
+    receipt.target_command = `npx -y openlookup@${receipt.published_version}`;
     receipt.target_cwd = cwd;
   } else {
     command = process.execPath;
-    args = [path.join(ROOT, 'bin/compound-mcp.js')];
-    receipt.target_command = `${command} bin/compound-mcp.js`;
+    args = [path.join(ROOT, 'bin/openlookup.js')];
+    receipt.target_command = `${command} bin/openlookup.js`;
   }
 
   // ── signal 3, reachability. Started first and awaited last, because it is independent of
@@ -318,7 +318,7 @@ export async function probe(opts = {}) {
   try {
     const t0 = nowMs();
     transport = new StdioClientTransport({ command, args, env: spawnEnv, cwd, stderr: 'pipe' });
-    client = new Client({ name: 'compound-mcp-health-probe', version: '1.0.0' });
+    client = new Client({ name: 'openlookup-health-probe', version: '1.0.0' });
 
     /* The child's stderr carries the only readable account of a spawn that died, and the SDK
      * hands back nothing but "Connection closed". Draining it is also what stops a chatty
@@ -493,7 +493,7 @@ function writeReceipt(receipt) {
 function render(receipt) {
   const mark = (s) => (s.ok ? 'PASS' : 'FAIL');
   const lines = [];
-  lines.push(`compound-mcp health  target=${receipt.target}  ${receipt.checked_at}`);
+  lines.push(`openlookup health  target=${receipt.target}  ${receipt.checked_at}`);
   lines.push(`  ${receipt.target_command}`);
   if (receipt.published_version) lines.push(`  published ${receipt.published_version}, repo ${receipt.repo_version}`);
   lines.push('');
@@ -526,9 +526,9 @@ function notify(receipt) {
       'python3',
       [
         NOTICES, 'add',
-        '--source', 'compound-mcp',
+        '--source', 'openlookup',
         '--lane', 'mcp-health',
-        '--summary', `compound-mcp ${receipt.target}: ${receipt.failing.join(', ')} failing`,
+        '--summary', `openlookup ${receipt.target}: ${receipt.failing.join(', ')} failing`,
         '--detail', detail.slice(0, 900),
       ],
       { stdio: 'ignore' },

@@ -1,4 +1,4 @@
-// compound-mcp — the directory tools.
+// openlookup — the directory tools.
 //
 // The compliance lookups in server.js answer a question a person already knew they had.
 // These answer questions an AGENT has mid-task, which is a different and much larger surface:

@@ -1,8 +1,10 @@
-# compound-mcp
+# OpenLookup
 
 MCP server from [Compound Labs](https://thecompound.tech). Eleven read-only lookup tools backed by live public data — no API key, no signup, nothing to sign up for.
 
-`mcp-name: tech.thecompound/compound-mcp`
+`mcp-name: tech.thecompound/openlookup`
+
+OpenLookup was published on npm as `compound-mcp` until 2026-10-02. That package is deprecated and points here. Install `openlookup` instead.
 
 Most of these answer questions that a model cannot answer correctly from a training cutoff, because the underlying fact changed after it: what a model costs today, whether a library is still maintained, whether someone has already published the skill you are about to write.
 
@@ -42,22 +44,22 @@ Checks a nonprofit's EIN against the IRS auto-revocation list and the California
 ## Install
 
 ```sh
-npm install -g compound-mcp
+npm install -g openlookup
 ```
 
-Or run without installing: `npx -y compound-mcp`
+Or run without installing: `npx -y openlookup`
 
 ## Run
 
 ```sh
-compound-mcp                # stdio (for MCP clients)
-compound-mcp --http 8974    # streamable HTTP on http://localhost:8974/mcp
+openlookup                # stdio (for MCP clients)
+openlookup --http 8974    # streamable HTTP on http://localhost:8974/mcp
 ```
 
 ## Claude Code
 
 ```sh
-claude mcp add compound -- npx -y compound-mcp
+claude mcp add openlookup -- npx -y openlookup
 ```
 
 ## Claude Desktop
@@ -67,9 +69,9 @@ Add to `claude_desktop_config.json` (Settings → Developer → Edit Config):
 ```json
 {
   "mcpServers": {
-    "compound": {
+    "openlookup": {
       "command": "npx",
-      "args": ["-y", "compound-mcp"]
+      "args": ["-y", "openlookup"]
     }
   }
 }
@@ -120,7 +122,7 @@ cannot say which one broke.
 
 ```sh
 npm run health          # the working tree, over stdio
-npm run health:public   # npx -y compound-mcp@latest, resolved fresh from npm
+npm run health:public   # npx -y openlookup@latest, resolved fresh from npm
 ```
 
 | Signal | What it answers |
@@ -130,7 +132,7 @@ npm run health:public   # npx -y compound-mcp@latest, resolved fresh from npm
 | `reachable` | Each public endpoint the tools read answers, right now. Recorded per host. |
 | `tool_outcome` | Calling a tool returns a usable payload. Separate from `tools_list` on purpose: a tool can be advertised and not work. |
 
-`--target public` is the deployment check, and it is deliberately outside CI. compound-mcp has
+`--target public` is the deployment check, and it is deliberately outside CI. openlookup has
 no deployed HTTP endpoint, so the public path is npm: it spawns the published tarball through
 `npx`, with a throwaway cache and from a neutral directory, so what answers is what a stranger
 gets rather than this checkout. Build success and externally reachable protocol state are
